@@ -1,18 +1,18 @@
-<%@page import="test.member.dao.MemberDao"%>
+<%@page import="test.todo.dao.TodoDao"%>
+<%@page import="test.todo.dto.TodoDto"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="test.member.dto.MemberDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	//클라이언트에게 출력한 회원 목록 얻어오기
-	List<MemberDto> list=MemberDao.getInstance().getList();
+	List<TodoDto> list=TodoDao.getInstance().getList();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/member/list.jsp</title>
+<title>/todo/list.jsp</title>
 <!-- bootstrap css 로딩 인터넷에서 가져오는법-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/Hello/css/bootstrap.css">
@@ -49,25 +49,26 @@
 					<thead class="table-dark">
 						<tr>
 							<th>번호</th>
-							<th>이름</th>
-							<th>주소</th>
-							<th>수정</th>
-							<th>삭제</th>
+							<th>할일</th>
+							<th>날짜</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<% for(MemberDto tmp:list){%>
+						<tr><%= list.size() %></tr>
+						<% for(TodoDto tmp:list){%>
 							<tr>
 								<td><%=tmp.getNum() %></td>
-								<td><%=tmp.getName() %></td>
-								<td><%=tmp.getAddr() %></td>
-								<td><a href="updateform.jsp?num=<%=tmp.getNum() %>">수정</a></td>
-								<td><a href="delete.jsp?num=<%=tmp.getNum() %>">삭제</a></td>
+								<td><%=tmp.getContent() %></td>
+								<td><%=tmp.getRegdate() %></td>
+								<td><a href="updateform.jsp?num=<%=tmp.getNum() %>" class="btn btn-primary">수정</a></td>
+								<td><a href="delete.jsp?num=<%=tmp.getNum() %>" class="btn btn-danger">삭제</a></td>
 							</tr>
 						<%} %>
 					</tbody>
 				</table>
-				<a href="insertform.jsp">회원추가</a>
+				<a href="insertform.jsp" class="btn btn-lg btn-secondary fw-bold border-white bg-black">할일추가</a>
             </main>
         </div>
 </body>

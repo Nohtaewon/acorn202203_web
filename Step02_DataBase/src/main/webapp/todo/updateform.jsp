@@ -1,10 +1,16 @@
+<%@page import="test.todo.dto.TodoDto"%>
+<%@page import="test.todo.dao.TodoDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	int num=Integer.parseInt(request.getParameter("num"));
+	TodoDto dto=TodoDao.getInstance().getData(num);
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/index.jsp</title>
+<title>/todo/updateform.jsp</title>
 <link rel="stylesheet" type="text/css" href="/Hello/css/bootstrap.css">
 <script src="js/bootstrap.js"></script>
 	<style>
@@ -32,15 +38,26 @@
             </div>
           </header>
           <main class="px-3">
-            <h1>노태원</h1>
+            <h1>수정양식</h1>
             <p class="lead">인덱스 페이지 입니다.</p>
             <p class="lead">
-              <img src="./images/kim1.png">
-              <a href="member/list.jsp" class="btn btn-lg btn-secondary fw-bold border-white bg-black">회원목록보기</a>
-              <a href="todo/list.jsp" class="btn btn-lg btn-secondary fw-bold border-white bg-black">할일목록보기</a>
-              <img src="./images/kim2.png">
+              	<form action="update.jsp" method="post">
+				<input type="hidden" name="num" value=<%=num %> />	
+				<div>
+					<label for="num">번호</label>
+					<input type="text" id="num" value=<%=num %> disabled/>
+				</div>
+				<div>
+					<label for="content">할일</label>
+					<input type="text" name="content" id="content" value=<%=dto.getContent() %>/>
+				</div>
+					<button type="submit">수정확인</button>
+					<button type="reset">취소</button>
+				</form>
             </p>
           </main>
         </div>
+
+
 </body>
 </html>
