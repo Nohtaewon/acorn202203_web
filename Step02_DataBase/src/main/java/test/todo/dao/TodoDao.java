@@ -10,12 +10,18 @@ import test.todo.dto.TodoDto;
 import test.util.DbcpBean;
 
 public class TodoDao {
+	//2. 자신의 참조값을 저장할 수 있는 static 필드 선언
 	private static TodoDao dao;
+	//1. 외부에서 객체 생성하지 못하도록 생성자의 접근 지정자를 private 로 지정
 	private TodoDao() {}
+	//3. 자신의 참조값을 리턴해주는 static 메소드 만들기
 	public static TodoDao getInstance() {
-		if(dao==null) {
+		//application 시작이후 최초로 호출된다면
+		if(dao==null) {//TodoDao.dao
+			//TodoDao 객체를 생성해서 static 필드에 담아둔다.
 			dao=new TodoDao();
 		}
+		//static 필드에 저장되어 있는 TodoDao 객체의 참조값을 리턴해 준다.
 		return dao;
 	}
 	//할일 한명의 정보를 리턴하는 메소드
